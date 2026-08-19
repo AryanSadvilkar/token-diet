@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --color-obsidian: #0A0A0C;
+  --color-slate-card: #131722;
+  --color-emerald-accent: #10B981;
+  --color-cyan-accent: #06B6D4;
+  --color-amber-accent: #F59E0B;
+  --color-slate-accent: #64748B;
+  --color-slate-text: #94A3B8;
+  --color-warm-border: rgba(255, 255, 255, 0.08);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
+/* Custom animations and styling rules */
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom styled scrollbars for pre elements */
+pre::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+pre::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Badges CSS Styles using three accent colors (emerald, cyan, amber) + slate baseline */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3.5px 12px;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+/* Active compression badges (Emerald) */
+.badge-active {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Cyan active/live badges */
+.badge-teal {
+  background-color: rgba(6, 182, 212, 0.12);
+  color: #06B6D4;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+/* Success Factual Parity (Emerald) */
+.badge-emerald {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: #10B981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Baseline inactive RAG (Slate) */
+.badge-gray {
+  background-color: rgba(100, 116, 139, 0.12);
+  color: #64748B;
+  border: 1px solid rgba(100, 116, 139, 0.3);
+}
+
+/* Form input custom range slider styles */
+input[type="range"]::-webkit-slider-thumb {
+  background-color: #10B981 !important;
+  border-radius: 9999px !important;
+}
+input[type="range"]::-moz-range-thumb {
+  background-color: #10B981 !important;
+  border-radius: 9999px !important;
+}

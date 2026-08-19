@@ -1,0 +1,37 @@
+# Default configuration for the Token-Diet Dynamic Context Compressor.
+# This file is the single source of truth for tunables. Environment
+# variables (see src.config.load_config) override individual values.
+
+system:
+  seed: 42
+  device: "cpu"          # "cpu" or "cuda"
+
+retriever:
+  top_k: 10              # chunks pulled from the vector DB per query
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+
+compressor:
+  global_token_budget: 800      # hard cap on packed context tokens; ~50% of typical retrieved context
+  sentence_tokenizer: "regex"   # "regex" | "nltk" | "spacy" (swap-friendly)
+  markdown_header_overhead_tokens: 15  # estimate per source group header
+
+  # Stage 2 — Fast Relevance Filter
+  fast_filter_candidate_limit: 20       # M candidates passed to the reranker (reduced for CPU speed)
+  bm25_weight: 0.5
+  embedding_weight: 0.5
+
+  # Stage 3 — Cross-Encoder Rerank
+  cross_encoder_model: "cross-encoder/ms-marco-TinyBERT-L-2-v2"  # 2-layer; ~5x faster on CPU than L-6
+  cross_encoder_batch_size: 32
+
+  # Stage 4 — Budget Selection
+  restoration_window_left: 1    # sentences restored to the left
+  restoration_window_right: 1   # sentences restored to the right
+  similarity_threshold: 0.8     # cosine threshold for redundancy pruning
+
+llm:
+  provider: "groq"             # "gemini" | "groq" | "openai" | "ollama"
+  model: "openai/gpt-oss-120b"
+  temperature: 0.0
+  max_tokens: 1024
+  api_key_env: "GEMINI_API_KEY"
